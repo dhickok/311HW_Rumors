@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 public class RumorReader {
 
-		private static String fName = "U:\\workspace\\David_Hickok_HW2_331\\rumorsTest";
+		private static String fName = "U:\\workspace\\David_Hickok_HW2_311\\rumors test";
 		
 		public static void main(String[] args) throws FileNotFoundException{
 			
@@ -25,7 +25,7 @@ public class RumorReader {
 							brokerArray[i][j] = 0;
 						}
 						else{
-							brokerArray[i][j] = 99;
+							brokerArray[i][j] = 9999;
 						}
 					}
 				}
@@ -39,15 +39,16 @@ public class RumorReader {
 						}
 					}
 					
-					for (int i = 0; i < brokerArray.length; i++){
-						System.out.println("");
-						for(int j = 0; j < brokerArray.length; j++){
-							System.out.print(brokerArray[i][j] + " ");
-						}
-					}
-					System.out.println("");
+//					for (int i = 0; i < brokerArray.length; i++){
+//						System.out.println("");
+//						for(int j = 0; j < brokerArray.length; j++){
+//							System.out.print(brokerArray[i][j] + " ");
+//						}
+//					}
+					//System.out.println("");
 					floydWarshall(brokerArray);
 					findPath(brokerArray);
+					
 			}
 		}
 		public static void floydWarshall(int bArray[][]){
@@ -65,25 +66,36 @@ public class RumorReader {
 						}
 					}
 				}
+				
 			}
+//			for (i = 0; i < brokerArray.length; i++){
+//				System.out.println("");
+//				for(j = 0; j < brokerArray.length; j++){
+//					System.out.print(brokerArray[i][j] + " ");
+//				}
+//			}
+			
 		}
 		public static void findPath(int bArray[][]){
-			int min = 99;
-			int max = 0;
-			int row = 0;
 			int brokerArray[][] = bArray;
+			int sum = 9999;
+			int rowSum = 0;
+			int row = 0;
 			for (int i = 0; i < brokerArray.length; i++){
+				rowSum = 0;
 				for (int j = 0; j < brokerArray.length; j++){
-					if (brokerArray[i][j] > max){
-						max = brokerArray[i][j];
+					rowSum = rowSum + brokerArray[i][j];						
 					}
-					if (min < max){
-						min = max;
-						row = i + 1;
-					}
+				if (rowSum < sum){
+					sum = rowSum;
+					row = i + 1;
 				}
 			}
-			System.out.println(row + " " + min);
-			
+			if (sum >= 9999){
+				System.out.println("disjoint");
+			}
+			else{
+				System.out.println(row + " " + sum);
+			}	
 		}
 }
