@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 public class RumorReader {
 
-		private static String fName = "U:\\workspace\\David_Hickok_HW2_311\\rumors test";
+		private static String fName = "U:\\workspace\\David_Hickok_HW2_311\\rumorTestText";
 		
 		public static void main(String[] args) throws FileNotFoundException{
 			
@@ -25,7 +25,7 @@ public class RumorReader {
 							brokerArray[i][j] = 0;
 						}
 						else{
-							brokerArray[i][j] = 9999;
+							brokerArray[i][j] = 99999;
 						}
 					}
 				}
@@ -78,24 +78,36 @@ public class RumorReader {
 		}
 		public static void findPath(int bArray[][]){
 			int brokerArray[][] = bArray;
-			int sum = 9999;
+			int sum = 99999;
 			int rowSum = 0;
 			int row = 0;
+			int rowMax = 0;
+			int max = 99999;
 			for (int i = 0; i < brokerArray.length; i++){
 				rowSum = 0;
+				rowMax = 0;
 				for (int j = 0; j < brokerArray.length; j++){
-					rowSum = rowSum + brokerArray[i][j];						
+					rowSum = rowSum + brokerArray[i][j];
+					if (brokerArray[i][j] < 99999 && rowMax < brokerArray[i][j]){
+						rowMax = brokerArray[i][j];
+						//System.out.println(rowMax);
 					}
+				}
 				if (rowSum < sum){
 					sum = rowSum;
-					row = i + 1;
+					if (rowMax < max){
+						max = rowMax;
+						//System.out.println("The max is: " + max);
+						row = i;
+					}
+					//row = i;	
 				}
 			}
-			if (sum >= 9999){
+			if (sum >= 99999){
 				System.out.println("disjoint");
 			}
 			else{
-				System.out.println(row + " " + sum);
+				System.out.println(row + 1 + " " + max);
 			}	
 		}
 }
